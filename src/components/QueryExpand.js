@@ -14,6 +14,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Query from '@arcgis/core/tasks/support/Query';
 import QueryTask from '@arcgis/core/tasks/QueryTask';
 
+import HistoryLayers from './HistoryLayers';
+
 import './QueryExpand.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -63,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth:'120px'
     }
 }));
+
 const DateInput = (props) => {
     const classes = useStyles();
 
@@ -136,8 +139,8 @@ const IdsInput =(props)=>{
                     Start over
         </Button>
         <Button variant="contained" color="primary" 
-        className={ classes.nextButton}  >
-                    Add to Map
+        className={ classes.nextButton}  onClick = {props.submitIds}>
+            Add to Map
         </Button>
         </>);
 }
@@ -146,15 +149,17 @@ const QueryExpand = (props) => {
 
     const [expanded, setExpanded] = useState(false);
     const [wait, setWait] = useState(false);
-    const [enableDataRangeInput, setEnableDataRangeInput] = useState(true);    
+    const [enableDataRangeInput, setEnableDataRangeInput] = useState(true);
     const [fromValue, setFromValue] = useState(null);
     const [toValue, setToValue] = useState(null);
-    const [ids,setIds]=useState([]);
+    const [ids, setIds] = useState([]);
+    const [selectedIds, setSelectedIds]=useState([]);
+
     const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";
     const idField = "LoginName";
     const queryAvlTask = new QueryTask({
         url: `${Avl_History}/0`
-    });
+    });   
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -188,8 +193,7 @@ const QueryExpand = (props) => {
                 setWait(false);
 
             });
-    }
-
+    };
     const handleIdCheckChange =(event)=>{
         let newList=[...ids];
         if(event.target.name==="select all"){
@@ -201,25 +205,13 @@ const QueryExpand = (props) => {
             let index=newList.findIndex(id=>{return id.value===event.target.name});
             newList[index].checked=event.target.checked;
         }
-        setIds(newList);
-        
+        setIds(newList);     
 
-
-
-        debugger;
-        //[event.target.name]: event.target.checked
-
-        // let newList=[...ids];
-        // if(add){
-        //     newList.push(id);
-        //     setCheckedIds(newList);
-        // }else{
-        //     let index=newList.findIndex(id);
-        //     if(index)newList.splice(pos, 1);
-        // }
-        
-
+    };
+    const handleSubmitIds = ()=>{ 
+        setSelectedIds (ids.filter(id=>id.checked));
     }
+
     return (<div className='sidebar'>
         <Button variant='contained' color='primary' className={classes.button} onClick={handleExpandClick} >
             <div className={classes.expand}>{expanded ? "<" : ">"}</div>
@@ -227,11 +219,14 @@ const QueryExpand = (props) => {
         </Button>
         <div style={{display:(expanded?'inline':'none')}}>
             <DateInput fromValue={fromValue} setFromValue={setFromValue} toValue={toValue} setToValue={setToValue} submitDateRange={handleSubmitDateRange} enableInput={enableDataRangeInput}/>
-            {ids.length>0&&<IdsInput ids={ids} idCheckChange={handleIdCheckChange}/>}
+            {ids.length>0&&<IdsInput ids={ids} idCheckChange={handleIdCheckChange} submitIds={handleSubmitIds}/>}
             <Backdrop className={classes.backdrop} open={wait} >
                 <CircularProgress color="inherit" />
             </Backdrop>
         </div>
+        <HistoryLayers ids={selectedIds} setSelectedIds={setSelectedIds} addNewHistoryLayer={props.addNewHistoryLayer} 
+            idField={idField} fromValue={fromValue} toValue={toValue} serviceUrl={Avl_History}
+        />
     </div>);
 }
 

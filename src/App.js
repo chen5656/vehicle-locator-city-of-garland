@@ -71,7 +71,10 @@ function layerListFunc(event) {
 function App() {
 
   const mapDiv = useRef(null);
+  const [map,setMap]=useState(null);
+
   const [view,setView]=useState(null);
+  const [historyLayerArray, setHistoryLayerArray]=useState([]);
 
   useEffect(() => {
     if (mapDiv.current) {
@@ -92,6 +95,7 @@ function App() {
       });
 
       setView(view);
+      setMap(map);
 
 
       var searchWidget = new Search({
@@ -120,7 +124,7 @@ function App() {
 
       var layerList = new LayerList({
         view: view,
-        listItemCreatedFunction: layerListFunc
+        // listItemCreatedFunction: layerListFunc
       });
 
 
@@ -170,10 +174,17 @@ function App() {
     }
   }, []);
 
+  const addNewHistoryLayer = (layer) => {
+    var newArray = [...historyLayerArray];
+    newArray.push(layer);
+    setHistoryLayerArray(newArray);
+    map.add(layer.layer);
+  }
+
   return (
     <>
       <div className="mapDiv" ref={mapDiv}></div>
-      {view&&<QueryExpand view={view}/>}
+      {view&&<QueryExpand addNewHistoryLayer={addNewHistoryLayer}/>}
     </>);
 }
 
