@@ -127,6 +127,7 @@ const IdsInput =(props)=>{
     const classes = useStyles();
     return (<>
         <div className={classes.ids}>
+            <EachId key={'select all'} id={{value:'select all',checked:props.ids.filter(id=>id.checked===false).length===0}}  idCheckChange={props.idCheckChange}/>
             <FormGroup row >
                 {props.ids.map(id=> <EachId key={id.value} id={id} idCheckChange={props.idCheckChange}/>)}
             </FormGroup>  
@@ -179,10 +180,6 @@ const QueryExpand = (props) => {
                             checked:false
                         }
                     });
-                    ids.unshift({
-                        value:'select all',
-                        checked:false,
-                    })
                     setIds(ids);
                 } else {
                     alert("No data returned. Please try a different date range.")
