@@ -15,6 +15,8 @@ import Viewpoint from '@arcgis/core/Viewpoint';
 import Extent from '@arcgis/core/geometry/Extent';
 import Locator from '@arcgis/core/tasks/Locator';
 import Query from '@arcgis/core/tasks/support/Query';
+import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
+
 
 import QueryExpand from './components/QueryExpand'
 
@@ -75,6 +77,8 @@ function App() {
 
   const [view,setView]=useState(null);
   const [historyLayerArray, setHistoryLayerArray]=useState([]);
+  const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";
+
 
   useEffect(() => {
     if (mapDiv.current) {
@@ -174,11 +178,18 @@ function App() {
     }
   }, []);
 
-  const addNewHistoryLayer = (layer) => {
+  const addNewHistoryLayer = (sublayer) => {
     var newArray = [...historyLayerArray];
-    newArray.push(layer);
-    setHistoryLayerArray(newArray);
-    map.add(layer.layer);
+    var layer = new MapImageLayer({
+      url: Avl_History,
+      id: "VehicleHistory" + (newArray.length + 1),
+      title: "Vehicle History",
+      sublayers: [sublayer.sublayer]
+  });
+  
+  newArray.push(layer);
+  setHistoryLayerArray(newArray);
+    map.add(layer);
   }
 
   return (

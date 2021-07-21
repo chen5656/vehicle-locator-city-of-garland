@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     ids:{
         border: ' 1px #aaa solid',
         overflow: 'auto',
-        height: ' 500px',
+        height: ' 450px',
         padding: '15px',
         margin: '5px',
     },
@@ -75,6 +75,7 @@ const DateInput = (props) => {
     const handleToTimeChange=(e)=>{
         props.setToValue(e.target.value);
     }
+    
     return (
         <form autoComplete="off" >
                 <TextField            
@@ -86,7 +87,6 @@ const DateInput = (props) => {
                     inputProps={{
                       max:new Date().toISOString().split("T")[0] + "T23:59:59", 
                     }}
-                    defaultValue={props.fromValue}
                     className={classes.textField} 
                     InputLabelProps={{
                         shrink: true,
@@ -104,7 +104,6 @@ const DateInput = (props) => {
                         max: new Date().toISOString().split("T")[0] + "T23:59:59", 
                         min:props.fromValue,
                       }}
-                      defaultValue={props.toValue}
                     className={classes.textField} 
                     InputLabelProps={{
                         shrink: true,
@@ -135,7 +134,9 @@ const IdsInput =(props)=>{
                 {props.ids.map(id=> <EachId key={id.value} id={id} idCheckChange={props.idCheckChange}/>)}
             </FormGroup>  
         </div>      
-        <Button variant="contained"   className={classes.cancelButton}  >
+        <div><Checkbox name='add-label' checked={false} />Add label</div>
+        
+        <Button variant="contained"   className={classes.cancelButton}  onClick={props.resetForm}>
                     Start over
         </Button>
         <Button variant="contained" color="primary" 
@@ -148,24 +149,22 @@ const QueryExpand = (props) => {
     const classes = useStyles();
 
     const [expanded, setExpanded] = useState(false);
-    const [wait, setWait] = useState(false);
     const [enableDataRangeInput, setEnableDataRangeInput] = useState(true);
     const [fromValue, setFromValue] = useState(null);
     const [toValue, setToValue] = useState(null);
     const [ids, setIds] = useState([]);
     const [selectedIds, setSelectedIds]=useState([]);
 
-    const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";
+    
     const idField = "LoginName";
     const queryAvlTask = new QueryTask({
-        url: `${Avl_History}/0`
+        url: `https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer/0`
     });   
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
     const handleSubmitDateRange =() =>{
-        setWait(true);
         setEnableDataRangeInput(false);
         var dtFrom=fromValue.replace("T", " ");
         var dtTo=toValue.replace("T", " ");
@@ -190,8 +189,6 @@ const QueryExpand = (props) => {
                     alert("No data returned. Please try a different date range.")
                     setEnableDataRangeInput(true);
                 }
-                setWait(false);
-
             });
     };
     const handleIdCheckChange =(event)=>{
@@ -212,6 +209,14 @@ const QueryExpand = (props) => {
         setSelectedIds (ids.filter(id=>id.checked));
     }
 
+    const resetForm=()=>{
+        setFromValue(null);
+        setToValue(null);
+        setIds([]);
+        setSelectedIds([]);
+        setEnableDataRangeInput(true);
+    }
+
     return (<div className='sidebar'>
         <Button variant='contained' color='primary' className={classes.button} onClick={handleExpandClick} >
             <div className={classes.expand}>{expanded ? "<" : ">"}</div>
@@ -219,13 +224,10 @@ const QueryExpand = (props) => {
         </Button>
         <div style={{display:(expanded?'inline':'none')}}>
             <DateInput fromValue={fromValue} setFromValue={setFromValue} toValue={toValue} setToValue={setToValue} submitDateRange={handleSubmitDateRange} enableInput={enableDataRangeInput}/>
-            {ids.length>0&&<IdsInput ids={ids} idCheckChange={handleIdCheckChange} submitIds={handleSubmitIds}/>}
-            <Backdrop className={classes.backdrop} open={wait} >
-                <CircularProgress color="inherit" />
-            </Backdrop>
+            {ids.length>0&&<IdsInput ids={ids} idCheckChange={handleIdCheckChange} submitIds={handleSubmitIds} resetForm={resetForm}/>}
         </div>
         <HistoryLayers ids={selectedIds} setSelectedIds={setSelectedIds} addNewHistoryLayer={props.addNewHistoryLayer} 
-            idField={idField} fromValue={fromValue} toValue={toValue} serviceUrl={Avl_History}
+            idField={idField} fromValue={fromValue} toValue={toValue} 
         />
     </div>);
 }

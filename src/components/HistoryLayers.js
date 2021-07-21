@@ -1,8 +1,5 @@
 
 import React, { useRef, useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
-
 function getRandomColor() {
     // var letters = "0123456789ABCDEF";
     // var color = "#";
@@ -66,6 +63,26 @@ const getSymbol  = (colors,setColors,ids,idField)=>{
     return renderer;
 
 }
+
+const getLabelClass=(labelExpression)=>{
+    const labelClass = {  // autocasts as new LabelClass()
+        symbol: {
+          type: "text",  // autocasts as new TextSymbol()
+          color: "navy",
+          font: {  // autocast as new Font()
+             family: "Ubuntu Mono",
+             size: 10,
+           }
+        },
+        labelPlacement: "above-right",
+        labelExpressionInfo: {
+          expression: labelExpression
+        },
+        maxScale: 0,
+        minScale: 25000000,
+      };
+      return labelClass
+}
 const HistoryLayers = (props) => {
     const [colors, setColors] = useState(
         [
@@ -77,8 +94,6 @@ const HistoryLayers = (props) => {
         ]
     );
 
-    const [historyLayers,setHistoryLayers]=useState([]);
-
     useEffect(() => {
         if(props.ids.length>0){
             var dtFrom=props.fromValue.replace("T", " ");
@@ -86,26 +101,21 @@ const HistoryLayers = (props) => {
             
             //add to map
             var renderer= getSymbol(colors,setColors,props.ids, props.idField);
-            var layer = new MapImageLayer({
-                url: props.serviceUrl,
-                id: "VehicleHistory" + (historyLayers.length + 1),
-                title: "Vehicle History",
-                sublayers: [{
-                    id: 0,
-                    visible: true,
-                    title: "VehicleHistory",
-                    definitionExpression: `LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}' and ${props.idField} in (${props.ids.map(id=>{return `'${id.value}'`}).join(",")}) `,
-                    renderer: renderer,
-                   popupTemplate: {
-                        title: `<b>Vehicle:</b> {${props.idField}}`,
-                        content: `<b>Date:</b> {LocationDate}`,
-                    }
-                }]
-            });
-    
-           
+            var sublayer={
+                id: 0,
+                visible: true,
+                title: "VehicleHistory",
+                definitionExpression: `LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}' and ${props.idField} in (${props.ids.map(id=>{return `'${id.value}'`}).join(",")}) `,
+                renderer: renderer,
+                popupTemplate: {
+                    title: `<b>Vehicle:</b> {${props.idField}}`,
+                    content: `<b>Date:</b> {LocationDate}`,
+                },// "$feature.Team + TextFormatting.NewLine + $feature.Division"
+                labelingInfo:getLabelClass("$feature.LocationDate")
+              
+            };        
             props.addNewHistoryLayer({
-                layer:layer,
+                sublayer:sublayer,
                 from:props.fromValue,
                 to:props.toValue,
                 ids:props.ids,
