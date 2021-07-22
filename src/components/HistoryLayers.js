@@ -1,13 +1,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 function getRandomColor() {
-    // var letters = "0123456789ABCDEF";
-    // var color = "#";
-    // for (var i = 0; i < 6; i++) {
-    //   color += letters[Math.floor(Math.random() * 16)];
-    // }
     return [randomNumber(), randomNumber(), randomNumber()];
-
     function randomNumber() {
         const max = 255;
         const min = 0;
@@ -21,18 +15,18 @@ const getSymbol  = (colors,setColors,ids,idField)=>{
     var tempColors= [...colors];
     var fiveUniqueValue = ids.slice(0, 5).map((id) => {
         var color;//colors
-        var index=tempColors.findIndex((item)=>{return item.id===id});
+        var index=tempColors.findIndex((item)=>{return item.id===id.value});
         if (index!==-1) {
             color = tempColors[index].value;
         } else {
             let newIndex=tempColors.findIndex(item=>!item.id);
             if (newIndex!==-1) {
                 color = tempColors[newIndex].value;
-                tempColors[newIndex].id=id;
+                tempColors[newIndex].id=id.value;
             } else {
                 color = getRandomColor();
                 tempColors.push({
-                    id:id,
+                    id:id.value,
                     value:color,
                 })
             }
