@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
  
 import Query from '@arcgis/core/tasks/support/Query';
 import QueryTask from '@arcgis/core/tasks/QueryTask';
+import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 
 import HistoryLayers from './HistoryLayers';
 
@@ -161,6 +162,9 @@ const QueryExpand = (props) => {
     const [selectedIds, setSelectedIds]=useState([]);
     const [addLabelValue, setAddLabel]=useState(false);
 
+    const [historyLayerArray, setHistoryLayerArray]=useState([]);
+    const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";
+
     
     const idField = "LoginName";
     const queryAvlTask = new QueryTask({
@@ -218,6 +222,20 @@ const QueryExpand = (props) => {
     const handleAddLabel=(e)=>{
         setAddLabel ( e.target.checked);
     }
+    const addNewHistoryLayer = (sublayer) => {
+        debugger
+        var newArray = [...historyLayerArray];
+        var layer = new MapImageLayer({
+            url: Avl_History,
+            id: "VehicleHistory" + (newArray.length + 1),
+            title: "Vehicle History",
+            sublayers: [sublayer]
+        });
+
+        newArray.push(layer);
+        setHistoryLayerArray(newArray);
+        props.map.add(layer);
+    }
 
     const resetSelectedIds=()=>{
         let newArray=[...ids]
@@ -249,8 +267,8 @@ const QueryExpand = (props) => {
             }
         </div>
         <HistoryLayers selectedIds={selectedIds} resetSelectedIds={resetSelectedIds} 
-            addNewHistoryLayer={props.addNewHistoryLayer} 
-            idField={idField} fromValue={fromValue} toValue={toValue}  addLabelValue={addLabelValue}
+            addNewHistoryLayer={addNewHistoryLayer} 
+            idField={idField} fromValue={fromValue} toValue={toValue}  addLabelValue={addLabelValue} 
         />
     </div>);
 }

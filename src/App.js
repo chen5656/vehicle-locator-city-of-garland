@@ -1,21 +1,13 @@
 import React, { useRef, useEffect,useState } from "react";
-import Bookmarks from '@arcgis/core/widgets/Bookmarks';
-import Expand from '@arcgis/core/widgets/Expand';
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import esriConfig from "@arcgis/core/config";
 
 
 import Search from '@arcgis/core/widgets/Search';
-import Home from '@arcgis/core/widgets/Home';
 import Legend from '@arcgis/core/widgets/Legend';
 import LayerList from '@arcgis/core/widgets/LayerList';
 import BasemapToggle from '@arcgis/core/widgets/BasemapToggle';
-import Viewpoint from '@arcgis/core/Viewpoint';
-import Extent from '@arcgis/core/geometry/Extent';
-import Locator from '@arcgis/core/tasks/Locator';
-import Query from '@arcgis/core/tasks/support/Query';
-import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 
 
 import QueryExpand from './components/QueryExpand'
@@ -76,8 +68,6 @@ function App() {
   const [map,setMap]=useState(null);
 
   const [view,setView]=useState(null);
-  const [historyLayerArray, setHistoryLayerArray]=useState([]);
-  const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";
 
 
   useEffect(() => {
@@ -132,7 +122,7 @@ function App() {
       });
 
 
-      // layerList.on("trigger-action", function (event) {
+    var s= { // layerList.on("trigger-action", function (event) {
 
       //   const id = event.action.id;
       //   const layer = event.item.layer
@@ -170,32 +160,17 @@ function App() {
 
       //   }
       // });
+    }
       view.ui.add(layerList, "bottom-left");
-
-
-
-
     }
   }, []);
 
-  const addNewHistoryLayer = (sublayer) => {
-    var newArray = [...historyLayerArray];
-    var layer = new MapImageLayer({
-      url: Avl_History,
-      id: "VehicleHistory" + (newArray.length + 1),
-      title: "Vehicle History",
-      sublayers: [sublayer.sublayer]
-  });
-  
-  newArray.push(layer);
-  setHistoryLayerArray(newArray);
-    map.add(layer);
-  }
+ 
 
   return (
     <>
       <div className="mapDiv" ref={mapDiv}></div>
-      {view&&<QueryExpand addNewHistoryLayer={addNewHistoryLayer}/>}
+      {view&&<QueryExpand map={map} />}
     </>);
 }
 
