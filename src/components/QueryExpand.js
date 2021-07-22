@@ -70,6 +70,8 @@ const DateInput = (props) => {
     const classes = useStyles();
 
     const handleFromTimeChange=(e)=>{
+        var s=document.getElementById('dateTimeTo')
+        debugger
         props.setFromValue(e.target.value);
     }
     const handleToTimeChange=(e)=>{
@@ -86,6 +88,8 @@ const DateInput = (props) => {
                     disabled ={!props.enableInput}
                     inputProps={{
                       max:new Date().toISOString().split("T")[0] + "T23:59:59", 
+                      value:props.fromValue,
+
                     }}
                     className={classes.textField} 
                     InputLabelProps={{
@@ -103,6 +107,7 @@ const DateInput = (props) => {
                     inputProps={{
                         max: new Date().toISOString().split("T")[0] + "T23:59:59", 
                         min:props.fromValue,
+                        value:props.toValue,
                       }}
                     className={classes.textField} 
                     InputLabelProps={{
@@ -134,7 +139,7 @@ const IdsInput =(props)=>{
                 {props.ids.map(id=> <EachId key={id.value} id={id} idCheckChange={props.idCheckChange}/>)}
             </FormGroup>  
         </div>      
-        <div><Checkbox name='add-label' checked={false} />Add label</div>
+        <div><Checkbox name='add-label'   />Add label</div>
         
         <Button variant="contained"   className={classes.cancelButton}  onClick={props.resetForm}>
                     Start over
@@ -150,8 +155,8 @@ const QueryExpand = (props) => {
 
     const [expanded, setExpanded] = useState(false);
     const [enableDataRangeInput, setEnableDataRangeInput] = useState(true);
-    const [fromValue, setFromValue] = useState(null);
-    const [toValue, setToValue] = useState(null);
+    const [fromValue, setFromValue] = useState( '');
+    const [toValue, setToValue] = useState( '');
     const [ids, setIds] = useState([]);
     const [selectedIds, setSelectedIds]=useState([]);
 
@@ -210,8 +215,8 @@ const QueryExpand = (props) => {
     }
 
     const resetForm=()=>{
-        setFromValue(null);
-        setToValue(null);
+        setFromValue('');
+        setToValue('');
         setIds([]);
         setSelectedIds([]);
         setEnableDataRangeInput(true);
