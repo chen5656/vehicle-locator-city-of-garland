@@ -1,15 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
  
 import Query from '@arcgis/core/tasks/support/Query';
 import QueryTask from '@arcgis/core/tasks/QueryTask';
@@ -66,6 +63,16 @@ const useStyles = makeStyles((theme) => ({
         minWidth:'120px'
     }
 }));
+
+const formatLayerTitle=(from,to)=>{    
+    const optionsFrom = { year: '2-digit', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit' };
+    const optionsTo = {  month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit' };
+    let newFrom=new Intl.DateTimeFormat('en-US', optionsFrom).format(new Date(from));
+    let newTo=new Intl.DateTimeFormat('en-US', optionsTo).format(new Date(to));
+    return `${newFrom} - ${newTo}`;        
+}
 
 const DateInput = (props) => {
     const classes = useStyles();
@@ -161,11 +168,9 @@ const QueryExpand = (props) => {
     const [ids, setIds] = useState([]);
     const [selectedIds, setSelectedIds]=useState([]);
     const [addLabelValue, setAddLabel]=useState(false);
-
     const [historyLayerArray, setHistoryLayerArray]=useState([]);
-    const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";
 
-    
+    const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";    
     const idField = "LoginName";
     const queryAvlTask = new QueryTask({
         url: `https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer/0`
@@ -227,8 +232,8 @@ const QueryExpand = (props) => {
         var newArray = [...historyLayerArray];
         var layer = new MapImageLayer({
             url: Avl_History,
-            id: "VehicleHistory" + (newArray.length + 1),
-            title: "Vehicle History",
+            id: "vh" + (newArray.length + 1),
+            title: formatLayerTitle(fromValue,toValue),
             sublayers: [sublayer]
         });
 
