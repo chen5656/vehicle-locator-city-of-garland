@@ -168,7 +168,7 @@ const QueryExpand = (props) => {
     const [ids, setIds] = useState([]);
     const [selectedIds, setSelectedIds]=useState([]);
     const [addLabelValue, setAddLabel]=useState(false);
-    const [historyLayerArray, setHistoryLayerArray]=useState([]);
+    const [currentHistoryLayerPara,setcurrentHistoryLayerPara]=useState(null);
 
     const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";    
     const idField = "LoginName";
@@ -229,17 +229,29 @@ const QueryExpand = (props) => {
     }
     const addNewHistoryLayer = (sublayer) => {
         debugger
-        var newArray = [...historyLayerArray];
-        var layer = new MapImageLayer({
-            url: Avl_History,
-            id: "vh" + (newArray.length + 1),
-            title: formatLayerTitle(fromValue,toValue),
-            sublayers: [sublayer]
-        });
-
-        newArray.push(layer);
-        setHistoryLayerArray(newArray);
-        props.map.add(layer);
+        
+        if(currentHistoryLayerPara){
+            var layerPara={ ...currentHistoryLayerPara };
+            layerPara.sublayers.push(sublayer);
+            let mapLayers=props.map.allLayers.items;
+            let lastLayer=mapLayers[mapLayers.length-1];
+            if(lastLayer.id===layerPara.id){
+                props.map.remove(lastLayer);
+            }
+            let layer = new MapImageLayer(layerPara);            
+            props.map.add(layer);
+        }else{
+            var layerPara={
+                url: Avl_History,
+                id: "vh" + (props.map.allLayers.items.length + 1),
+                title: formatLayerTitle(fromValue,toValue),
+                sublayers: [sublayer]
+            }
+            
+            var layer = new MapImageLayer(layerPara);
+            props.map.add(layer);
+        }
+        setcurrentHistoryLayerPara(layerPara);
     }
 
     const resetSelectedIds=()=>{
@@ -255,6 +267,7 @@ const QueryExpand = (props) => {
         setIds([]);
         setSelectedIds([]);
         setEnableDataRangeInput(true);
+        setcurrentHistoryLayerPara(null);
     }
 
     return (<div className='sidebar'>
