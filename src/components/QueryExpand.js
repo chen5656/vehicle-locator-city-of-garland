@@ -7,9 +7,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
- 
-import Query from '@arcgis/core/tasks/support/Query';
-import QueryTask from '@arcgis/core/tasks/QueryTask';
 import MapImageLayer from "@arcgis/core/layers/MapImageLayer";
 
 import HistoryLayers from './HistoryLayers';
@@ -170,12 +167,6 @@ const QueryExpand = (props) => {
     const [addLabelValue, setAddLabel]=useState(false);
     const [currentHistoryLayerPara,setcurrentHistoryLayerPara]=useState(null);
 
-    const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";    
-    const idField = "LoginName";
-    const queryAvlTask = new QueryTask({
-        url: `https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer/0`
-    });   
-
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -183,19 +174,13 @@ const QueryExpand = (props) => {
         setEnableDataRangeInput(false);
         var dtFrom=fromValue.replace("T", " ");
         var dtTo=toValue.replace("T", " ");
-        var query = new Query({
-            where: `LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}'`,
-            outFields: [idField],
-            returnDistinctValues: true,
-            returnGeometry: false,
-            orderByFields: idField,
-        });
-        queryAvlTask.execute(query)
+        props.queryAvlHistoryFromServer(`LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}'`, true)
             .then(function (response) {
+                debugger
                 if (response.features.length > 0) {//query and get vehicle id list
                     var ids = response.features.map(feature => {
                         return { 
-                            value:feature.attributes[idField],
+                            value:feature.attributes[props.idField],
                             checked:false
                         }
                     });
@@ -240,7 +225,7 @@ const QueryExpand = (props) => {
             props.map.add(layer);
         }else{
             var layerPara={
-                url: Avl_History,
+                url: props.Avl_History,
                 id: "vh" + (props.map.allLayers.items.length + 1),
                 title: formatLayerTitle(fromValue,toValue),
                 sublayers: [sublayer]
@@ -284,7 +269,7 @@ const QueryExpand = (props) => {
         </div>
         <HistoryLayers selectedIds={selectedIds} resetSelectedIds={resetSelectedIds} 
             addNewHistoryLayer={addNewHistoryLayer} 
-            idField={idField} fromValue={fromValue} toValue={toValue}  addLabelValue={addLabelValue} 
+            idField={props.idField} fromValue={fromValue} toValue={toValue}  addLabelValue={addLabelValue} 
         />
     </div>);
 }
