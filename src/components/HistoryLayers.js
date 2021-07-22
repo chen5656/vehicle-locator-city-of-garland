@@ -95,37 +95,39 @@ const HistoryLayers = (props) => {
     );
 
     useEffect(() => {
-        if(props.ids.length>0){
+        if(props.selectedIds.length>0){
+
             var dtFrom=props.fromValue.replace("T", " ");
             var dtTo=props.toValue.replace("T", " ");
             
             //add to map
-            var renderer= getSymbol(colors,setColors,props.ids, props.idField);
+            var renderer= getSymbol(colors,setColors,props.selectedIds, props.idField);
             var sublayer={
                 id: 0,
                 visible: true,
                 title: "VehicleHistory",
-                definitionExpression: `LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}' and ${props.idField} in (${props.ids.map(id=>{return `'${id.value}'`}).join(",")}) `,
+                definitionExpression: `LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}' and ${props.idField} in (${props.selectedIds.map(id=>{return `'${id.value}'`}).join(",")}) `,
                 renderer: renderer,
                 popupTemplate: {
                     title: `<b>Vehicle:</b> {${props.idField}}`,
                     content: `<b>Date:</b> {LocationDate}`,
-                },// "$feature.Team + TextFormatting.NewLine + $feature.Division"
-                labelingInfo:getLabelClass("$feature.LocationDate")
-              
+                },              
             };        
+            if(props.addLabelValue){
+                sublayer.labelingInfo=getLabelClass("$feature.LocationDate");
+            }
             props.addNewHistoryLayer({
                 sublayer:sublayer,
                 from:props.fromValue,
                 to:props.toValue,
-                ids:props.ids,
+                ids:props.selectedIds,
             })
             //clear selectIds
-            props.setSelectedIds([]);
+            props.resetSelectedIds();
         }
         
 
-    }, [props.ids]);
+    }, [props.selectedIds]);
 
     return null;
 }

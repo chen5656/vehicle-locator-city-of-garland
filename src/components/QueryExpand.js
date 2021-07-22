@@ -70,8 +70,6 @@ const DateInput = (props) => {
     const classes = useStyles();
 
     const handleFromTimeChange=(e)=>{
-        var s=document.getElementById('dateTimeTo')
-        debugger
         props.setFromValue(e.target.value);
     }
     const handleToTimeChange=(e)=>{
@@ -82,6 +80,7 @@ const DateInput = (props) => {
         <form autoComplete="off" >
                 <TextField            
                     id="dateTimeFrom"
+                    size="small"
                     label="From"
                     type="datetime-local"
                     variant="outlined"
@@ -99,6 +98,7 @@ const DateInput = (props) => {
                 />
                 <TextField
                     id="dateTimeTo"
+                    size="small"
                     label="To"
                     type="datetime-local"
                     variant="outlined"
@@ -139,7 +139,7 @@ const IdsInput =(props)=>{
                 {props.ids.map(id=> <EachId key={id.value} id={id} idCheckChange={props.idCheckChange}/>)}
             </FormGroup>  
         </div>      
-        <div><Checkbox name='add-label'   />Add label</div>
+        <div><Checkbox name='add-label' onChange={props.handleAddLabel} checked={props.addLabelValue} />Add label</div>
         
         <Button variant="contained"   className={classes.cancelButton}  onClick={props.resetForm}>
                     Start over
@@ -159,6 +159,7 @@ const QueryExpand = (props) => {
     const [toValue, setToValue] = useState( '');
     const [ids, setIds] = useState([]);
     const [selectedIds, setSelectedIds]=useState([]);
+    const [addLabelValue, setAddLabel]=useState(false);
 
     
     const idField = "LoginName";
@@ -214,6 +215,17 @@ const QueryExpand = (props) => {
         setSelectedIds (ids.filter(id=>id.checked));
     }
 
+    const handleAddLabel=(e)=>{
+        setAddLabel ( e.target.checked);
+    }
+
+    const resetSelectedIds=()=>{
+        let newArray=[...ids]
+        newArray.forEach(id=>id.checked=false);
+        setIds(newArray);
+        setSelectedIds([]);
+    }
+
     const resetForm=()=>{
         setFromValue('');
         setToValue('');
@@ -229,10 +241,16 @@ const QueryExpand = (props) => {
         </Button>
         <div style={{display:(expanded?'inline':'none')}}>
             <DateInput fromValue={fromValue} setFromValue={setFromValue} toValue={toValue} setToValue={setToValue} submitDateRange={handleSubmitDateRange} enableInput={enableDataRangeInput}/>
-            {ids.length>0&&<IdsInput ids={ids} idCheckChange={handleIdCheckChange} submitIds={handleSubmitIds} resetForm={resetForm}/>}
+            {
+                ids.length > 0 &&
+                <IdsInput ids={ids} idCheckChange={handleIdCheckChange} submitIds={handleSubmitIds} resetForm={resetForm} 
+                    handleAddLabel={handleAddLabel} addLabelValue={addLabelValue}
+                />
+            }
         </div>
-        <HistoryLayers ids={selectedIds} setSelectedIds={setSelectedIds} addNewHistoryLayer={props.addNewHistoryLayer} 
-            idField={idField} fromValue={fromValue} toValue={toValue} 
+        <HistoryLayers selectedIds={selectedIds} resetSelectedIds={resetSelectedIds} 
+            addNewHistoryLayer={props.addNewHistoryLayer} 
+            idField={idField} fromValue={fromValue} toValue={toValue}  addLabelValue={addLabelValue}
         />
     </div>);
 }
