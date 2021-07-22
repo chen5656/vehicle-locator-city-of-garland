@@ -15,24 +15,24 @@ const getSymbol  = (colors,setColors,ids,idField)=>{
     var tempColors= [...colors];
     var fiveUniqueValue = ids.slice(0, 5).map((id) => {
         var color;//colors
-        var index=tempColors.findIndex((item)=>{return item.id===id.value});
+        var index=tempColors.findIndex((item)=>{return item.id===id});
         if (index!==-1) {
             color = tempColors[index].value;
         } else {
             let newIndex=tempColors.findIndex(item=>!item.id);
             if (newIndex!==-1) {
                 color = tempColors[newIndex].value;
-                tempColors[newIndex].id=id.value;
+                tempColors[newIndex].id=id;
             } else {
                 color = getRandomColor();
                 tempColors.push({
-                    id:id.value,
+                    id:id,
                     value:color,
                 })
             }
         }
         return {
-            value: "" + id.value,
+            value: "" + id,
             symbol: {
                 type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
                 size: 5,
@@ -95,13 +95,13 @@ const HistoryLayers = (props) => {
             var dtTo=props.toValue.replace("T", " ");
             
             //add to map
-            var where=`LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}' and ${props.idField} in (${props.selectedIds.map(id=>{return `'${id.value}'`}).join(",")}) `;
+            var where=`LocationDate>= '${dtFrom}' and LocationDate<= '${dtTo}' and ${props.idField} in (${props.selectedIds.map(id=>{return `'${id}'`}).join(",")}) `;
         
             var renderer= getSymbol(colors,setColors,props.selectedIds, props.idField);
             var sublayer={
                 id: 0,
                 visible: true,
-                title: props.selectedIds.length<=2?props.selectedIds.map(id=>{return id.value}).join(","):`${props.selectedIds.length} vehicles`,
+                title: props.selectedIds.length<=2?props.selectedIds.join(","):`${props.selectedIds.length} vehicles`,
                 definitionExpression: where,
                 renderer: renderer,
                 popupTemplate: {
@@ -111,7 +111,7 @@ const HistoryLayers = (props) => {
                 _userInput:{
                     from:props.fromValue,
                     to:props.toValue,
-                    ids:props.selectedIds,
+                    ids: props.selectedIds,
                 }       
             };        
             if(props.addLabelValue){

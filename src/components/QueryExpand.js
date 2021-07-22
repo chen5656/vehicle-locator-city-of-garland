@@ -71,7 +71,7 @@ const formatLayerTitle=(from,to)=>{
     hour: '2-digit', minute: '2-digit' };
     let newFrom=new Intl.DateTimeFormat('en-US', optionsFrom).format(new Date(from));
     let newTo=new Intl.DateTimeFormat('en-US', optionsTo).format(new Date(to));
-    return `${newFrom} - ${newTo}`;        
+    return `From: ${newFrom}; To: ${newTo}`;        
 }
 
 const DateInput = (props) => {
@@ -221,15 +221,13 @@ const QueryExpand = (props) => {
 
     };
     const handleSubmitIds = ()=>{ 
-        setSelectedIds (ids.filter(id=>id.checked));
+        setSelectedIds (ids.filter(id=>id.checked).map(id=>id.value));
     }
 
     const handleAddLabel=(e)=>{
         setAddLabel ( e.target.checked);
     }
     const addNewHistoryLayer = (sublayer) => {
-        debugger
-        
         if(currentHistoryLayerPara){
             var layerPara={ ...currentHistoryLayerPara };
             layerPara.sublayers.push(sublayer);

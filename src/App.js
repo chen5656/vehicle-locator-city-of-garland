@@ -10,52 +10,29 @@ import LayerList from '@arcgis/core/widgets/LayerList';
 import BasemapToggle from '@arcgis/core/widgets/BasemapToggle';
 
 
+import Query from '@arcgis/core/tasks/support/Query';
+import QueryTask from '@arcgis/core/tasks/QueryTask';
 import QueryExpand from './components/QueryExpand'
 
 
 import "./App.css";
 
 function layerListFunc(event) {
-  // The event object contains an item property.
-  // is is a ListItem referencing the associated layer
-  // and other properties. You can control the visibility of the
-  // item, its title, and actions using this object.
-
   var item = event.item;
-
-  if (item.title === "Vehicle History") {
-    // An array of objects defining actions to place in the LayerList.
-    // By making this array two-dimensional, you can separate similar
-    // actions into separate groups with a breaking line.
+  if (item.title .search(/From:.+To:/)>-1) {
     item.open = true;
-    var queryparas = item.layer._queryparas;
-    // set an action for zooming to the full extent of the layer
     item.actionsSections = [
-      [{
-        title: "From:" + queryparas.from,
-        className: "esri-icon-expand",
-        id: "showIds"
-      }, {
-        title: "To:" + queryparas.to,
-        className: "esri-icon-expand",
-        id: "showIds"
-      },
-      {
-        title: "" + queryparas.ids.slice(0, 5).join(",").concat(queryparas.ids.length > 5 ? "...(click to see the full list)" : ""),
-        className: "esri-icon-description",
-        id: "showIds"
-      }
-      ],
-      [{
+        [{
         title: "Download data (up to 1000 records)",
         className: "esri-icon-download",
         id: "downloadData"
-      }],
-      [{
-        title: "Delete",
-        className: "esri-icon-close",
-        id: "deleteLayer"
-      }]
+      },
+      // {
+      //   title: "Delete",
+      //   className: "esri-icon-close",
+      //   id: "deleteLayer"
+      // }
+    ]
     ];
 
   }
@@ -118,49 +95,59 @@ function App() {
 
       var layerList = new LayerList({
         view: view,
-        // listItemCreatedFunction: layerListFunc
+        listItemCreatedFunction: layerListFunc
+      });
+      
+      layerList.on("trigger-action", function (event) {       
+
+        var id = event.action.id;
+        var layer = event.item.layer
+        var subLayer = map.allLayers.find(function (item) {
+            return item.id === layer.id;
+        });
+        debugger
+        if (id === "deleteLayer") {
+          // map.remove(subLayer);
+          //what happened if current history layer is removing?
+          }else if (id === "downloadData") {
+           var allPromise= layer.allSublayers.items.map(sublayer=>{
+              let paras=sublayer._userInput //from,ids, to,
+              var where=`LocationDate>= '${paras.from}' and LocationDate<= '${paras.to}' and LoginName in (${paras.ids.join(",")}) `;
+        
+                var query = new Query({
+                    where: where,
+                    outFields: ["*"],
+                    returnGeometry: true,
+                    orderByFields:"Id",
+                });
+                var queryAvlTask = new QueryTask({
+                  url: `https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer/0`
+              });
+                return queryAvlTask.execute(query);
+             
+            })   
+            Promise.all(allPromise).then((values) => {
+              console.log(values);
+            });
+            debugger
+            // var idList=queryparas.ids.map(id=> `'${id}'`).join(",");
+            // var query = new Query({
+            //     where: `LocationDate>= '${queryparas.from}' and LocationDate<= '${queryparas.to}' and ${idField} in (${idList}) `,
+            //     outFields: ["*"],
+            //     returnGeometry: true,
+            //     orderByFields:"Id",
+            // });
+            // queryAvlTask.execute(query).then(function (result) {
+            //     const fields = result.fields.map(f => f.name);
+            //     exportData(fields, result.features);
+
+            // })
+
+        }
+
+
       });
 
-
-    var s= { // layerList.on("trigger-action", function (event) {
-
-      //   const id = event.action.id;
-      //   const layer = event.item.layer
-      //   const queryparas = layer._queryparas;
-      //   const _mapSubLayer = map.allLayers.find(function (item) {
-      //     return item.id === layer.id;
-      //   });
-
-      //   if (id === "showIds") {
-      //     view.popup.open({
-      //       // Set the popup"s title to the coordinates of the location
-      //       title: "",
-      //       location: view.center, // Set the location of the popup to the clicked location
-      //       content: `From ${queryparas.from} to ${queryparas.to} - <br><br>
-      //           <b>Login Name List: </b>${queryparas.ids.join(", ")}`,
-      //       actions: []
-      //     });
-
-      //   } else if (id === "deleteLayer") {
-      //     map.remove(_mapSubLayer);
-      //     historyLayers = historyLayers.filter(x => x != layer)
-      //   } else if (id === "downloadData") {
-      //     var idList = queryparas.ids.map(id => `'${id}'`).join(",");
-      //     var query = new Query({
-      //       where: `LocationDate>= '${queryparas.from}' and LocationDate<= '${queryparas.to}' and ${idField} in (${idList}) `,
-      //       outFields: ["*"],
-      //       returnGeometry: true,
-      //       orderByFields: "Id",
-      //     });
-      //     queryAvlTask.execute(query).then(function (result) {
-      //       const fields = result.fields.map(f => f.name);
-      //       exportData(fields, result.features);
-
-      //     })
-
-      //   }
-      // });
-    }
       view.ui.add(layerList, "bottom-left");
     }
   }, []);
