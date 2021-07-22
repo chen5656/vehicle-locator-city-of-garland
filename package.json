@@ -1,5 +1,6 @@
 {
-  "name": "jsapi-create-react-app",
+  "name": "vehicleLocate-COG-react-app",
+  "homepage":"http://cogmap4.garlandtx.gov/maps/water/avl",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
