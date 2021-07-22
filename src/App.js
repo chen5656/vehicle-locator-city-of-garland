@@ -12,7 +12,8 @@ import BasemapToggle from '@arcgis/core/widgets/BasemapToggle';
 
 import Query from '@arcgis/core/tasks/support/Query';
 import QueryTask from '@arcgis/core/tasks/QueryTask';
-import QueryExpand from './components/QueryExpand'
+import QueryExpand from './components/QueryExpand';
+import DownloadExcel from './components/DownloadData';
 
 
 import "./App.css";
@@ -23,6 +24,7 @@ function App() {
   const mapDiv = useRef(null);
   const [map,setMap]=useState(null);
   const [view,setView]=useState(null);
+  const [downloadData,setDownloadData]=useState(null);
 
   const Avl_History = "https://cogmap4.garlandtx.gov/server/rest/services/dept_Water/VehicleLocator_History/MapServer";    
   const idField = "LoginName";  
@@ -96,10 +98,7 @@ function App() {
               return queryAvlHistoryFromServer(where, false);                
             })   ;
             Promise.all(allPromise).then((featureSetArray) => {
-              featureSetArray.forEach(featureSet=>{
-                const fields = featureSet.fields.map(f => f.name);
-                exportData(fields, featureSet.features);
-              });
+              setDownloadData(featureSetArray);
             });
         }
 
@@ -206,6 +205,7 @@ function App() {
     <>
       <div className="mapDiv" ref={mapDiv}></div>
       {view&&<QueryExpand map={map} queryAvlHistoryFromServer={queryAvlHistoryFromServer} Avl_History={Avl_History} idField={idField}/>}
+      <DownloadExcel downloadData={downloadData} setDownloadData={setDownloadData}/>
     </>);
 }
 
