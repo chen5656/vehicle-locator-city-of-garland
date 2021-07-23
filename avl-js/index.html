@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+  <meta name='description' content=''>
+  <meta name='author' content='Huajun Chen'>
+  <link rel='icon' href='https://www.esri.com/favicon.ico'>
+
+  <title>Vehicle Locator</title>
+
+
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'
+    integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ' crossorigin='anonymous'>
+
+  <link rel='stylesheet' href='https://js.arcgis.com/4.18/esri/themes/light/main.css' />
+
+  <link rel='stylesheet' href='css/style.css'>
+
+
+
+</head>
+
+<body>
+
+
+  <div id='viewDiv'>
+    <div id='sidebar' class='m-2 '>
+
+      <button class='btn btn-primary' type='button' style='width:100%;height:50px;cursor:pointer' title='Click to open the tool'
+        id='cmdShowTool'>
+        <i class='esri-icon-right-triangle-arrow'></i> Query Vehicle Locator History
+      </button>
+
+      <div class='display-none m-2' id='AVLHistoryQueryTool'>
+        <form id='historyQueryTool'>
+
+          <div id='dataInput' class='mt-4'>
+            <div>
+              <label style='width: 50px;'>From: </label>
+              <input type='datetime-local' id='dateTimeFrom' required />
+              <span class='validity'></span>
+            </div>
+            <div>
+              <label style='width: 50px;'>To: </label>
+              <input type='datetime-local' id='dateTimeTo' required />
+              <span class='validity'></span>
+            </div>
+            <div class='m-4'>
+              <div id='multiselectNode' class='row display-none'
+                style="border: 1px #aaa solid;overflow: auto; max-height: 500px;">
+              </div>
+            </div>
+          </div>
+          <div>
+            <input type='button' class='btn btn-secondary ' style='cursor:pointer' id="btnStartOver" value='Start Over' />
+
+            <input type='submit' class='btn btn-primary nextStepBtn' style='cursor:pointer' id='nextStepBtn' value='Next' />
+          </div>
+
+        </form>
+
+
+
+ 
+        
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</body>
+
+</html>
+
+
+<!-- ArcGIS API for JavaScript library references -->
+<!-- ArcGIS API for JavaScript CSS-->
+
+<!-- ArcGIS JS -->
+<!-- <script>var dojoConfig = { has: { 'esri-promise-compatibility': 1 } };</script> -->
+
+<script src='https://js.arcgis.com/4.18/'></script>
+<script src='js/index.js'></script>
+
+
+</body>
+
+</html>

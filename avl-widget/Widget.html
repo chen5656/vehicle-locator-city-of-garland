@@ -1,0 +1,46 @@
+<div>
+	<div	class="formContainer">
+			
+			<table cellspacing="15" style="width:100%;">
+				
+				<tr>				
+					<td>Vehicle	ID:</td>
+					<td>
+						<input type="text" value="*" id= "VehicleID" />
+					</td>
+				</tr>
+                
+				<tr>
+					<td>From:</td>
+					<td>
+						<input type="datetime-local" id="DateTimeFrom" />
+					</td>
+				</tr>				
+				
+				<tr>
+					<td>To:</td>
+					<td>
+						<input type="datetime-local" " id="DateTimeTo" />
+					</td>
+				</tr>
+				
+			
+			</table>
+			
+		<div>(Enter <font size="5" color ="blue" ><b> * </b></font> as Vehicle ID for a wildcard search.) </div>
+        <div> <a href="https://maps.garlandtx.gov/gisimages/gis_app_builder/AVLexample1.jpg" target="_blank">Input Example 1</a></div>
+        <div> <a href="https://maps.garlandtx.gov/gisimages/gis_app_builder/AVLexample2.jpg" target="_blank">Input Example 2</a></div>
+                                                                                         
+		<div><input	type="button"	value="Apply"	data-dojo-attach-event="onclick:_onClick_ApplyQuery"></div>
+		
+		
+		
+		<div id="QueryCount"> </div>	
+		
+		
+		<div><font size="3" color="red" id ="ErrorMsg"></font></div>	
+													  
+		<div id="QueryCount"> </div>	
+																									 
+		</div>
+</div>

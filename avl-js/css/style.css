@@ -1,0 +1,66 @@
+html,
+body,
+#viewDiv {
+  height: 100%;
+  width: 100%;
+}
+
+#sidebar {
+  z-index: 99;
+  /*An element with greater stack order is always in front of an element with a lower stack order.*/
+  position: absolute;
+  top: 0;
+  right: 0;
+  /*height: 100%;*/
+  background: rgba(0, 0, 0, 0.65);
+  width: 320px;
+}
+
+label {
+  color: white;
+  text-shadow: 2px 2px black;
+}
+.nextStepBtn {
+  position: relative;
+  left: 80px;
+
+}
+
+.display-none {
+  display: none
+}
+
+input[type='datetime-local'] {
+  width:220px;
+  margin-left:10px;
+}
+
+
+
+
+form div div {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.width90 {
+  width: 90%;
+}
+
+label {
+  display: inline-block;  
+}
+
+
+input:invalid+span:after {
+  content: '✖';
+  color: red;
+  padding-left: 5px;
+}
+
+input:valid+span:after {
+  content: '✓';
+  color: rgb(22, 175, 22);
+  padding-left: 5px;
+}
