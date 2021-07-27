@@ -1,0 +1,4 @@
+1. nightly - compress sde
+2. weekly rebuild system table indexes
+https://desktop.arcgis.com/en/arcmap/10.3/manage-data/gdbs-in-sql-server/rebuild-system-table-indexes.htm
+

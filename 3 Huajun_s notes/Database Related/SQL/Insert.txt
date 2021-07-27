@@ -1,0 +1,4 @@
+INSERT INTO table2
+(column_name(s))
+SELECT column_name(s)
+FROM table1;

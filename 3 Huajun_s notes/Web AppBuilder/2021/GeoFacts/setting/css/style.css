@@ -1,0 +1,58 @@
+.jimu-widget-geofacts-setting table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.jimu-widget-geofacts-setting .help-text {
+  color: silver;
+  line-height: 20px;
+}
+
+.jimu-widget-geofacts-setting tbody th:nth-child(1) {
+  width: 30%;
+}
+
+.jimu-widget-geofacts-setting tbody th:nth-child(2) {
+  width: 70%;
+}
+
+.jimu-widget-geofacts-setting input {
+  width: 100%;
+
+}
+
+.jimu-widget-geofacts-setting input,
+.jimu-widget-geofacts-setting select {
+  font-size: 110%;
+}
+
+.jimu-widget-geofacts-setting th,
+.jimu-widget-geofacts-setting td {
+  padding:4px 0px;
+}
+
+.jimu-widget-geofacts-setting .help-text .collapsible {
+  background-color: white; 
+  color: #989898;
+  cursor: pointer;
+  padding: 10px;
+   width: 30%;  
+   display: block;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.jimu-widget-geofacts-setting .help-text .active,
+.jimu-widget-geofacts-setting .help-text .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.jimu-widget-geofacts-setting .help-text .content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  /* background-color: #f1f1f1; */
+}

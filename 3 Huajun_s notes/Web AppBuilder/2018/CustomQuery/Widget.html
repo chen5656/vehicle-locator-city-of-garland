@@ -1,0 +1,33 @@
+
+	<div	class="formContainer">
+		
+		<div><font size="2"><br>* Note: <br>1. drag-and-drop the file <br>2. please import a comma, semi-colon, or tab delimited text file (CSV or TXT) 
+			<br>3. The address information must be saved with one of the following names: address, addr, location.<br> 
+			<br></font></div>	
+			
+		<br>
+		<div id="CustomQueryResult" > </div>
+		
+		<div>
+			<font size="2">File: </font>	
+			<input type="text" id="CustomQueryfile" value = "Drag file HERE" disabled ="true" style="height:50px;width:80%;">
+		</div>
+			
+		
+		<br>
+		
+		<div>
+			<label >Symbol Color:</label>
+			<input data-dojo-attach-point="_CustomQueryMarkerColor"><br>
+			<label >Label Color :</label>
+			<input data-dojo-attach-point="_CustomQueryMarkerColor">
+		</div>
+		<br>		
+		
+		<div><input	type="button"	class="black-button"  value="Import Addresses"	data-dojo-attach-event="onclick:_CustomQueryAddresses"></div>
+		<br>
+		<div><input	type="button"	class="black-button"  value="Remove All"	data-dojo-attach-event="onclick:_CustomQueryRemoveAll"></div>
+		
+
+	
+	</div>

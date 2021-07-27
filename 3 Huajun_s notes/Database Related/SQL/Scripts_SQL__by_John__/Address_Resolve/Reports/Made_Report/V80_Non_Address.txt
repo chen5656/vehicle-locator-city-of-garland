@@ -1,0 +1,147 @@
+                  record key                                                                                                
+----------------- -------------------- ----- ----- ------------------------------ ------ ----- ----- -------- ----- --------
+Non Address       1283                             RR XING @ E MILLER                                   T-SIG               
+Non Address       12966                            MUIRFIELD & STONE MT                                SPRINK               
+Non Address       12967                            FOUNTAIN HILL/FIRECR                                                     
+Non Address       13055                            RIVER OAKS & BRAND                                  SPRINK               
+Non Address       13391                            MUIRFIELD & N GARLAN                                SPRINK               
+Non Address       13398                            RT 2 BOX 202A BRAND                                 S/TANK               
+Non Address       13439                            HWY 78 @ BEN DAVIS                                   T-SIG               
+Non Address       13440                            HWY 190 @ BRAND                                      T-SIG               
+Non Address       13668                            RT 2 BRAND                                                               
+Non Address       13693                            RT 2 BRAND                                                               
+Non Address       13694                            RT 2 BRAND                                                               
+Non Address       13696                            RT 2 BOX 79B B DAVIS                                                     
+Non Address       14424                            RR XING @ W AVENUE F                                 T-SIG               
+Non Address       14786                            FLANIGAN @ BRAND                                     IRRIG               
+Non Address       14787                            O'SHANNON @ BRAND                                    IRRIG               
+Non Address       15                               MAIN & NINTH                                        SPRINK               
+Non Address       1658                             FOREST LANE/MARION                                  SPRINK               
+Non Address       16769                            1724 WILLOW HOLLOW                                      TP               
+Non Address       1785                             MILE POST 63                                                             
+Non Address       1786                             PLAYGROUND                                           IRRIG               
+Non Address       179                              SIXTH & GARLAND                                     SPRINK               
+Non Address       1899                             RR XING @ W KINGSLEY                                 T-SIG               
+Non Address       1962                             TENNIS CTR                                                               
+Non Address       1981                             TENNIS CTR                                                               
+Non Address       20                               NINTH & AVENUE A                                    SPRINK               
+Non Address       21                               NINTH & AVENUE A                                    SPRINK               
+Non Address       219                              RR XING @ WALNUT                                     T-SIG               
+Non Address       2614                             HOPKINS & CLARK                                       *GYM               
+Non Address       26265                            VALLEY CRK & ROWLETT                                SPRINK               
+Non Address       2630                             HOPKINS & AVE F                                     SPRINK               
+Non Address       2643                             HWY 78 @ WALNUT CIR                                  T-SIG               
+Non Address       2674                             REC CENTER                                                               
+Non Address       2747                             REC CENTER                                                               
+Non Address       2816                             ATHLETIC CTS                                                             
+Non Address       2881                             BALLFIELDS                                                               
+Non Address       295                              IRRIGATION                                                               
+Non Address       2976                             FREEDOM PARK                                         IRRIG               
+Non Address       3020                             CARTER COMPLEX-IRRIG                                                     
+Non Address       3022                             CARTER COMPLEX-PARK                                                      
+Non Address       3023                             CARTER COMPLEX-BALLF                                                     
+Non Address       30235                    6       BROADWAY  *11*                 BLVD                 S/TANK               
+Non Address       30312                            ROWLETT@BAITHOUSE              RD                                        
+Non Address       3064                             RT 1 ROSEHILL                                                            
+Non Address       3085                             SWIM POOL                                                                
+Non Address       3141                             SWIM POOL                                                                
+Non Address       3173                             TENNIS COURT                                                             
+Non Address       331                              WAREHOUSE NO                                                             
+Non Address       3376                             RT 1 OATES DR                                                            
+Non Address       347                              RR XING @ N GARLAND                                  T-SIG               
+Non Address       3492                             GEN PK & RRM                                                             
+Non Address       3729                             ZION & BAYBERRY                                                          
+Non Address       3744                             KELSO & LOCUST GROVE                                                     
+Non Address       3751                             CENTERVILLE/NW HWY                                  SPRINK               
+Non Address       3816                             RR XING @ E CENTERVI                                 T-SIG               
+Non Address       3933                             COLLINS & JUPITER                                   SPRINK               
+Non Address       4029                             HWY 78 @ CASTLE                                      T-SIG               
+Non Address       4036                             GCSF TOWER                                                               
+Non Address       4051                             AQUATIC CTR A                                                            
+Non Address       4053                             BALLFIELDS                                            IRRG               
+Non Address       4074                             TENNIS CTS                                                               
+Non Address       4083                             TENNIS CTS                                                               
+Non Address       4164                             BALLFIELDS                                            IRRG               
+Non Address       417                              GRANGER CTR                                                              
+Non Address       4181                             GEN PK                                               IRRIG               
+Non Address       4185                             SWIM POOL                                                                
+Non Address       421                              ANNEX                                                                    
+Non Address       4226                             CONCESS STND                                                             
+Non Address       4266                             REC CENTER                                                               
+Non Address       4270                             FIRST & RR CROSSING                                                      
+Non Address       4283                             BALLFIELDS                                           IRRIG               
+Non Address       4286                             FOOTBALL FIELD                                                           
+Non Address       4288                             FOOTBALL FIELD                                                           
+Non Address       4298                             BALLFIELDS                                                               
+Non Address       4304                             HWY @ BUCKINGHAM                                                         
+Non Address       4327                             CONCESS STND                                                             
+Non Address       4456                             CULLOM PARK                                           POOL               
+Non Address       4479                             WINTERS PARK-SOCCER                                                      
+Non Address       4594                             RT 2 BOX 230                                                             
+Non Address       460                              GRANGER CTR                                                              
+Non Address       4721                             RT 2 BOX 230                                          SANI               
+Non Address       483                              BALLFIELD #1                                                             
+Non Address       4857                             R CTR & POOL                                                             
+Non Address       4870                             SPRINGPARK @WELLESLE                                 IRRIG               
+Non Address       492                              CONCESSION #4                                                            
+Non Address       4961                             MCCALLUM/O'HENRY                                                         
+Non Address       501                              FIELD #5                                                                 
+Non Address       524                              FIELD #1                                                                 
+Non Address       5253                             LOTTIE WATSON                                         POOL               
+Non Address       5261                             CORNELL @ YALE                                      SPRINK               
+Non Address       53858                            DENTON & KINGSLEY                                                        
+Non Address       5388                             BALLFIELDS                                                               
+Non Address       5389                             BOBBIE @ NORMAN GRV                                 CONCES               
+Non Address       5453                             CLARA BARTON/WALNUT                                 SPRINK               
+Non Address       55235                            PLEASANT VLY/MILES                                  DUMPST               
+Non Address       55237                    6       DANRIDGE/ROWLETT               RD                   DUMPST               
+Non Address       56775                            BIG OAKS @SHILOH                                    SPRINK               
+Non Address       568                        W     AVENUE C @ SANTE                                                         
+Non Address       575                        S     GARLAND @ INWOOD               AVE                   IRRIG               
+Non Address       5896                             RR XING @WOOD/MERRIT                                                     
+Non Address       5897                             RR XING @WOOD/LONNEC                                                     
+Non Address       593                              WALNUT @ N FIFTH                                     T-SIG               
+Non Address       597                        S     GARLAND @ INWOOD               AVE                   IRRIG               
+Non Address       61246                            MEDIAN/HIGHGATE PL                                  SPRINK               
+Non Address       6311                             RR XING @ 2999 MCCRE                                 T-SIG               
+Non Address       6395                             BIRCHWOOD @ NW HWY                                                       
+Non Address       64528                            RT 2 BOX 233                                                             
+Non Address       6507                             BROADWAY/I30 MEDIAN                                 SPRINK               
+Non Address       6651                             BROADWAY/COLONEL                                                         
+Non Address       67069                            BOIS D'ARC                     CT                                        
+Non Address       67070                            BOIS D'ARC                     CT                                        
+Non Address       67071                            BOIS D'ARC                     CT                                        
+Non Address       67072                            BOIS D'ARC                     CT                                        
+Non Address       67077                            BOIS D'ARC                     CT                                        
+Non Address       67078                            BOIS D'ARC                     CT                                        
+Non Address       67079                            BOIS D'ARC                     CT                                        
+Non Address       67080                            BOIS D'ARC                     CT                                        
+Non Address       67894                            DIAMOND OAK/BUCKINGH                                SPRINK               
+Non Address       6796                     3       EASTON MEADOWS (PVT)           DR                   BLDG11               
+Non Address       6799                     3       EASTON MEADOWS (PVT)           DR                   BLDG 2               
+Non Address       68090                            SPRINGPARK @WOODS CT                                 IRRIG               
+Non Address       7017                             COUNTRY CLB/EAGL PAS                                SPRINK               
+Non Address       7082                             MILLER & GATEWAY                                    SPRINK               
+Non Address       7089                             CENTERVILLE/TREE FAR                                SPRINK               
+Non Address       7141                             LAWRENCE AT SHILOH                                                       
+Non Address       720                              FOREST LA @ S SHILOH                                 T-SIG               
+Non Address       7347                             CONCESS STND                                                             
+Non Address       789                              GARLAND SHP CNTR                                                         
+Non Address       80656                            FOREST/JUPITER POSITION #1                        SANI                   
+Non Address       80657                            FOREST/JUPITER POSITION #2                        SANI                   
+Non Address       80658                            FOREST/JUPITER POSITION #3                        SANI                   
+Non Address       80659                            FOREST/JUPITER POSITION #4                        SANI                   
+Non Address       80660                            FOREST/JUPITER POSITION #5                        SANI                   
+Non Address       80662                            ADLETA                                            SANI                   
+Non Address       81616                                                                                                     
+Non Address       82455                                                                                                     
+Non Address       82456                                                                                                     
+Non Address       82457                            2334 W BUCKINGHAM RD STE 360                                             
+Non Address       82458                                                                                                     
+Non Address       82793                    2       2334 W BUCKINGHAM RD STE 360                                             
+Non Address       84412                    1       SIERRA                                            TP                     
+Non Address       84647                    1       SUMMIT RIDGE                                      TP                     
+Non Address       84766                    4       PARADISE                       COVE               TP                     
+Non Address       84767                    4       PARADISE                       COVE               TP                     
+Non Address       85442                    1       RUSTIC CREEK                                      TP                     
+144 rows selected.

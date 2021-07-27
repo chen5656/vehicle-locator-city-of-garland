@@ -1,0 +1,101 @@
+<div style="width:100%;height:100%;">
+    <div class="settings-section" data-dojo-attach-point="a111">
+        <table class="setting-table input-table" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th>Geometry Service</th>
+                    <td>
+                        <input data-dojo-attach-point="geometryServiceUrl" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="help-text">The url of the service that will be used for calculation.</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>OutSpatial Reference Wkid ID</th>
+                    <td>
+                        <input data-dojo-attach-point="outSpatialReferenceWkid" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="help-text">Used to trasfer point data.( Default value 4326 is Web Mercator
+                            projection.)</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Geometry Calculation Type</th>
+                    <td>
+                        <select data-dojo-attach-point="geometryCalculationType">
+                            <option value="planar">planar</option>
+                            <option value="geodesic">geodesic</option>
+                            <option value="preserveShape">preserveShape</option>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="help-text" data-dojo-attach-point="helpText">
+                            <p>Defines the type of calculation for the geometry length and area. Click the type name to
+                                show the description:</p>
+                            <button type="button" class="collapsible"><i class="esri-icon-question"> </i>Planar</button>
+                            <div class="content">
+                                <p>Planar measurements use 2D Cartesian mathematics to calculate length. Use
+                                    this type if the length needs to be calculated in the input spatial
+                                    reference
+                                    otherwise use preserveShape.</p>
+                            </div>
+                            <div>
+                                <button type="button" class="collapsible"><i class="esri-icon-question">
+                                    </i>Geodesic</button>
+                                <div class="content">
+                                    <p>Use this type to calculate an area or length using only the vertices of
+                                        the polygon to define the lines connecting the vertices as geodesic segments
+                                        independent of the actual shape of the polygon. Note: a geodesic segment is the
+                                        shortest path between two points on an ellipsoid.</p>
+                                </div>
+                                <button type="button" class="collapsible"><i class="esri-icon-question"> </i>Preserve
+                                    Shape</button>
+                                <div class="content">
+                                    <p>Calculate the area or length of the geometry on the surface of the
+                                        Earth ellipsoid, for geometries defined in a projected or geographic coordinate
+                                        system. This method preserves the shape of the geometry in its coordinate system
+                                        which means the true area or length will be calculated for the geometry that is
+                                        displayed on the map.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Length unit</th>
+                    <td>
+                        <select data-dojo-attach-point="geometryCalculationLengthUnit">
+                            <option value="UNIT_FOOT">Feet</option>
+                            <option value="UNIT_STATUTE_MILE">Miles</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Area unit</th>
+                    <td>
+                        <select data-dojo-attach-point="geometryCalculationAreaUnit">
+                            <option value="UNIT_SQUARE_FEET">Sq feet</option>
+                            <option value="UNIT_SQUARE_MILES">Sq miles</option>
+                            <option value="UNIT_ACRES">Acres</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+ 
+create or replace trigger GARLAND.INSP_ARCH
+BEFORE 
+UPDATE
+of ADDR_NAME
+,ADDR_NUM
+,ADDR_PFX
+,ADDR_SFX
+,ADDR_TYPE
+,BRANCH
+,CATEGORY
+,CDBG
+,CLASS
+,CONST_DATE
+,COUN_DIST
+,CRACK_SEAL
+,DISTRESSES
+,FROM_ADDR_NAME
+,FROM_ADDR_NUM
+,FROM_ADDR_PFX
+,FROM_ADDR_SFX
+,FROM_ADDR_TYPE
+,LANES
+,LAST_INSPECT_DATE
+,LENG
+,MISSING_SDWK
+,NEXT_INSPECT_DATE
+,PCI
+,POT_HOLE_REQ
+,REAR_ENTRY
+,REMARKS
+,SECTION
+,SEGMENT
+,SURF_TYPE
+,THOR_TYPE
+,TO_ADDR_NAME
+,TO_ADDR_NUM
+,TO_ADDR_PFX
+,TO_ADDR_SFX
+,TO_ADDR_TYPE
+on GARLAND.PAVE_MAST
+REFERENCING NEW AS NEW OLD AS OLD
+for each row 
+BEGIN 
+insert into insp_arch(
+     CATEGORY,
+    
+BRANCH,
+     SECTION,
+     SEGMENT,
+     LENG,
+  
+  LANES,
+     SURF_TYPE,
+     REAR_ENTRY,
+     CDBG,
+
+    CONST_DATE,
+     LAST_INSPECT_DATE,
+     NEXT_INSPECT_DATE,
+
+    PCI,
+     CLASS,
+     CRACK_SEAL,
+     DISTRESSES,
+
+    POT_HOLE_REQ,
+     COUN_DIST,
+     THOR_TYPE,
+
+    ADDR_NUM,
+     ADDR_PFX,
+     ADDR_NAME,
+    
+ADDR_TYPE,
+     ADDR_SFX,
+     FROM_ADDR_NUM,
+   
+ FROM_ADDR_PFX,
+     FROM_ADDR_NAME,
+     FROM_ADDR_TYPE,
+
+    FROM_ADDR_SFX,
+     TO_ADDR_NUM,
+     TO_ADDR_PFX,
+
+    TO_ADDR_NAME,
+     TO_ADDR_TYPE,
+     TO_ADDR_SFX,
+
+    REMARKS) 
+values(
+     :old.CATEGORY,
+     :old.BRANCH,
+
+    :old.SECTION,
+     :old.SEGMENT,
+     :old.LENG,
+
+    :old.LANES,
+     :old.SURF_TYPE,
+     :old.REAR_ENTRY,
+
+    :old.CDBG,
+     :old.CONST_DATE,
+     :old.LAST_INSPECT_DATE,
+
+    :old.NEXT_INSPECT_DATE,
+     :old.PCI,
+     :old.CLASS,
+
+    :old.CRACK_SEAL,
+     :old.DISTRESSES,
+     :old.POT_HOLE_REQ,
+
+    :old.COUN_DIST,
+     :old.THOR_TYPE,
+     :old.ADDR_NUM,
+
+    :old.ADDR_PFX,
+     :old.ADDR_NAME,
+     :old.ADDR_TYPE,
+
+    :old.ADDR_SFX,
+     :old.FROM_ADDR_NUM,
+     :old.FROM_ADDR_PFX,
+
+    :old.FROM_ADDR_NAME,
+     :old.FROM_ADDR_TYPE,
+
+    :old.FROM_ADDR_SFX,
+     :old.TO_ADDR_NUM,
+  
+  :old.TO_ADDR_PFX,
+     :old.TO_ADDR_NAME,
+     :old.TO_ADDR_TYPE,
+
+    :old.TO_ADDR_SFX,
+     :old.REMARKS);
+end;

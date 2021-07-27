@@ -1,0 +1,36 @@
+--	================================================================
+set echo		off;
+set linesize	2000;
+set pagesize	999;
+set sqlblanklines	on;
+set serveroutput	on	size 99999;
+alter session set nls_date_format = 'yyyy-mm-dd  hh24:mi:ss';
+--	================================================================
+
+/*  
+--	=====================================================================
+--	truncate table	jdeacutis.plan_table	reuse storage;
+--	explain plan set statement_id = ' '	into jdeacutis.plan_table for
+--	=====================================================================
+	create or replace view garland.test_view   as
+	select	v.valve_name valve_id, 
+		p.parcel_id
+	from	garland.water_ivr_valve		V,
+		garland.water_ivr_parcel		P
+	where	v.cluster_id	= p.cluster_id;
+--	=====================================================================
+--	select * from jdeacutis.explain_Plan;
+*/
+
+   select * from  garland.water_ivr_valve where valve_name = 'WT7C-087VA';
+   select * from  garland.water_ivr_parcel where cluster_id = 130727;
+   select * from  garland.test_view where valve_id = 'WT7C-087VA';   
+
+   select count(*) from
+   (
+   select cluster_id from garland.water_ivr_valve
+   intersect
+   select cluster_id from garland.water_ivr_parcel   
+   );
+
+--   select valve_id from gis.water_valve where rownum < 11;

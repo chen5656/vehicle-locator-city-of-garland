@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
@@ -73,18 +73,21 @@ const formatLayerTitle=(from,to)=>{
 
 const DateInput = (props) => {
     const classes = useStyles();
+    const inputFrom= useRef(null);
+    const inputTo= useRef(null);
 
-    const handleFromTimeChange=(e)=>{
-        props.setFromValue(e.target.value);
-    }
-    const handleToTimeChange=(e)=>{
-        props.setToValue(e.target.value);
+    const handleOnClick=(e)=>{
+
+        var dtFrom=inputFrom.current.value.replace("T", " ");
+        var dtTo=inputTo.current.value.replace("T", " ");
+        debugger    
+        props.submitDateRange(dtFrom,dtTo);
     }
     
     return (
         <form autoComplete="off" >
                 <TextField            
-                    id="dateTimeFrom"
+                   ref={inputFrom}
                     size="small"
                     label="From"
                     type="datetime-local"
@@ -99,10 +102,10 @@ const DateInput = (props) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={handleFromTimeChange}
+                    
                 />
-                <TextField
-                    id="dateTimeTo"
+                <TextField               
+                    ref={inputTo}
                     size="small"
                     label="To"
                     type="datetime-local"
@@ -118,10 +121,10 @@ const DateInput = (props) => {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={handleToTimeChange}
+                    
                 />
                 <Button variant="contained" color="primary" className={props.enableInput?classes.nextButton:classes.hidden} 
-                 disabled={!(props.fromValue&&props.toValue&&props.fromValue <props.toValue)} onClick={props.submitDateRange}>
+                 disabled={!(props.fromValue&&props.toValue&&props.fromValue <props.toValue)} onClick={handleOnClick}>
                     Next
                 </Button>
         </form>
@@ -170,7 +173,7 @@ const QueryExpand = (props) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const handleSubmitDateRange =() =>{
+    const handleSubmitDateRange =(from,to) =>{
         setEnableDataRangeInput(false);
         var dtFrom=fromValue.replace("T", " ");
         var dtTo=toValue.replace("T", " ");

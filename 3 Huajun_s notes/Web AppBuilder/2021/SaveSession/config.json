@@ -1,0 +1,6 @@
+{
+    "useServerToDownloadFile": true,
+    "saveToFileUrl": "http://tst-gis-cogmap1/Service/SaveToFile/",
+    "fileNameForAllSessions": "COGMAP_Sessions.json",
+    "fileNameTplForSession": "COGMAP_Sessions_${name}.json"
+}
