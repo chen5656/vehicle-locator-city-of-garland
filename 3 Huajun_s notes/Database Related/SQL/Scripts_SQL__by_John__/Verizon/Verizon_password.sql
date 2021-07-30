@@ -1,2 +1,0 @@
-
-	Verizon CDROM Unzip Password

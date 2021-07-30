@@ -1,2 +1,0 @@
-
-	ANIMAL CONTROL

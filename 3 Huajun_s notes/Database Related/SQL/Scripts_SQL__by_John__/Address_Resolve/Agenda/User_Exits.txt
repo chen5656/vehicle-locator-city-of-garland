@@ -1,5 +1,0 @@
-
-
-x.	nvl ltrim rtrim		by User Exit or Main Driver ?
-
-		 

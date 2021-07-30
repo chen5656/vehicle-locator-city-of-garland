@@ -1,1 +1,0 @@
-select USER_NAME from sde.show_active group by user_name; 
